@@ -1,0 +1,141 @@
+DISPLAYING THE POST IN VIEW POST SCREEN WITH FALT LIST
+    <ScrollView>
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => (
+          <Card style={{ marginBottom: 20 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                marginLeft: 10,
+                marginTop: 10,
+              }}
+            >
+              <Avatar.Image
+                size={24}
+                source={{ uri: item.authorProfileUrl }}
+                size={50}
+              />
+
+              <Card.Title title={item.authorName} style={{ width: 200 }} />
+            </View>
+            <Card.Content>
+              <Title style={{ color: "#0F1E37" }}></Title>
+            </Card.Content>
+
+            <Image
+              source={{ uri: item.postUrl }}
+              resizeMode="auto"
+              resizeMethod="resize"
+              style={{ height: 200 }}
+            />
+
+            <Paragraph style={{ padding: 10 }}>{item.postDesc}</Paragraph>
+
+            <Card.Actions>
+              <Button
+                onPress={() => {
+                  setPostLiked(!postLiked);
+                }}
+                style={{
+                  elevation: 1,
+                  borderWidth: 1,
+                  borderColor: "#ccc",
+                  paddingHorizontal: 10,
+                }}
+              >
+                {postLiked ? (
+                  <AntDesign name="like2" size={24} color="#fc036b" />
+                ) : (
+                  <AntDesign name="like2" size={24} color="black" />
+                )}{" "}
+                <Text
+                  style={{
+                    fontSize: 16,
+                    paddingVertical: 10,
+                    color: postLiked ? "#fc036b" : "#000",
+                  }}
+                >
+                  {item.postLikes}
+                </Text>
+              </Button>
+            </Card.Actions>
+          </Card>
+        )}
+      />
+    </ScrollView>
+
+DISPLAYING THE POST IN VEW POST SCREEN WITH MAPPING
+
+      <ScrollView>
+        {posts.map((item) => (
+          <ScrollView>
+            <View key={item.key}>
+              <Card style={{ marginBottom: 20 }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: 10,
+                    marginTop: 10,
+                  }}
+                >
+                  <Avatar.Image
+                    size={24}
+                    source={{ uri: item.authorProfileUrl }}
+                    size={50}
+                  />
+
+                  <Card.Title
+                    title={item.authorName}
+                    style={{ width: 200 }}
+                    subtitle={item.authorEmail}
+                    subtitleStyle={{ width: "100%" }}
+                  />
+                </View>
+                <Card.Content>
+                  <Title style={{ color: "#0F1E37" }}></Title>
+                </Card.Content>
+
+                <Image
+                  source={{ uri: item.postUrl }}
+                  resizeMode="contain"
+                  resizeMethod="resize"
+                  style={{ height: 200 }}
+                />
+
+                <Paragraph style={{ padding: 10 }}>{item.postTitle}</Paragraph>
+                <Paragraph style={{ padding: 10 }}>{item.postDesc}</Paragraph>
+
+                <Card.Actions>
+                  <Button
+                    onPress={() => {
+                      setPostLiked(!postLiked);
+                    }}
+                    style={{
+                      elevation: 1,
+                      borderWidth: 1,
+                      borderColor: "#ccc",
+                      paddingHorizontal: 10,
+                    }}
+                  >
+                    {postLiked ? (
+                      <AntDesign name="like2" size={24} color="#fc036b" />
+                    ) : (
+                      <AntDesign name="like2" size={24} color="black" />
+                    )}{" "}
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        paddingVertical: 10,
+                        color: postLiked ? "#fc036b" : "#000",
+                      }}
+                    >
+                      {item.postLikes}
+                    </Text>
+                  </Button>
+                </Card.Actions>
+              </Card>
+            </View>
+          </ScrollView>
+        ))}
+      </ScrollView>
