@@ -229,7 +229,6 @@ export default function Profile() {
             <View style={styles.container}>
               <TouchableOpacity onPress={() => selectRBSheet.current.open()}>
                 <View
-                  style={styles.avatarHolder}
                   style={{ alignSelf: "center", marginTop: "5%" }}
                 >
                   <Image

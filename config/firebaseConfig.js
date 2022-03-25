@@ -1,22 +1,12 @@
 import { initializeApp } from "firebase/app";
-// export default {
-//   apiKey: "AIzaSyCG0bzfU8snUVH4dBUFq76i2fNh53nLO58",
-//   authDomain: "social-app-f7061.firebaseapp.com",
-//   projectId: "social-app-f7061",
-//   storageBucket: "social-app-f7061.appspot.com",
-//   messagingSenderId: "730070548982",
-//   appId: "1:730070548982:web:05f6a55e79985afb6887d7",
-//   measurementId: "G-0Y9W8PHHBF",
-// };
 
 const config = {
-  apiKey: "AIzaSyCG0bzfU8snUVH4dBUFq76i2fNh53nLO58",
-  authDomain: "social-app-f7061.firebaseapp.com",
-  projectId: "social-app-f7061",
-  storageBucket: "social-app-f7061.appspot.com",
-  messagingSenderId: "730070548982",
-  appId: "1:730070548982:web:05f6a55e79985afb6887d7",
-  measurementId: "G-0Y9W8PHHBF",
+  apiKey: "AIzaSyBIcfNd6NmWVqik9BA_esfQvxtJg_lkiQE",
+  authDomain: "share-me-dbb49.firebaseapp.com",
+  projectId: "share-me-dbb49",
+  storageBucket: "share-me-dbb49.appspot.com",
+  messagingSenderId: "588028483363",
+  appId: "1:588028483363:web:43aa67c8338953cdfd1e96",
 };
 
 export const firebaseConfig = initializeApp(config);
