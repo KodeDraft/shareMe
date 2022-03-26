@@ -20,10 +20,10 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 // LOADER => INSTALLED
 import LottieView from "lottie-react-native";
-// SAFE AREA VIEW THAT AVOIDES THE 
+// SAFE AREA VIEW THAT AVOIDES THE
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function ChatSetting() {
+export default function ChatSetting(props) {
   const [image, setImage] = useState(null);
   const [loader, setLoader] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -117,7 +117,7 @@ export default function ChatSetting() {
                 />
               }
               titleText="Settings"
-              leftIconOnPress={() => alert("navigation on progress")}
+              leftIconOnPress={() => props.navigation.navigate("bottomTab")}
             />
             <Text style={styles.title}>Chat System Settings</Text>
 

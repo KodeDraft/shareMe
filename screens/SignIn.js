@@ -25,6 +25,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../config/firebaseConfig";
@@ -145,9 +146,30 @@ const SignIn = ({ navigation }) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setErrorMessage(errorCode);
+
+        if (errorCode == "auth/wrong-password") {
+          setErrorMessage("Wrong Password");
+        } else if (errorCode == "auth/invalid-email") {
+          setErrorMessage("Invalid Email");
+        } else {
+          setErrorMessage(errorCode);
+        }
 
         scrollTop();
+      });
+  };
+  const forgotPassword = () => {
+    sendPasswordResetEmail(auth, data.username)
+      .then(() => {
+        alert("Email Sent");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode == "auth/missing-email") {
+          console.log("Email Missing");
+        } else if ("auth/invalid-email") {
+          console.log("Invalid Email");
+        }
       });
   };
   // JSK
@@ -231,6 +253,7 @@ const SignIn = ({ navigation }) => {
           >
             Password
           </Text>
+
           <View style={styles.action}>
             <Feather name="lock" color={colors.text} size={20} />
             <TextInput
@@ -261,6 +284,10 @@ const SignIn = ({ navigation }) => {
               </Text>
             </Animatable.View>
           )}
+
+          <TouchableOpacity style={{ padding: 5 }} onPress={forgotPassword}>
+            <Text style={{ marginTop: 10 }}>Forgot Password</Text>
+          </TouchableOpacity>
 
           <View style={styles.button}>
             <TouchableOpacity

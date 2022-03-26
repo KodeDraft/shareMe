@@ -34,7 +34,7 @@ import Header from "../../components/Header";
 // ICONS
 import { Ionicons } from "@expo/vector-icons";
 
-export default function Chat() {
+export default function Chat(props) {
   useLayoutEffect(() => {
     getMessages();
     getbackgroundImage();
@@ -68,9 +68,25 @@ export default function Chat() {
     });
   };
   const getbackgroundImage = async () => {
-    const unsub = onSnapshot(doc(db, "settings", user.uid), (doc) => {
-      const data = doc.data();
-      setChatBackgroundImage(data.chatBackgroundImage);
+    const colRef = collection(db, "settings");
+
+    const q = query(colRef);
+
+    onSnapshot(q, (snapshot) => {
+      let bg = [];
+      snapshot.docs.forEach((doc) => {
+        bg.push({
+          ...doc.data(),
+          id: doc.id,
+        });
+      });
+      if (bg.length < 1) {
+        setChatBackgroundImage(
+          "https://w0.peakpx.com/wallpaper/1007/845/HD-wallpaper-abstract-3d-shadow-background-blue-cool-design-harmony-light-pastel-yellow.jpg"
+        );
+      } else {
+        setChatBackgroundImage(bg[0].chatBackgroundImage);
+      }
     });
   };
   const onSend = useCallback((messages = []) => {
@@ -99,11 +115,11 @@ export default function Chat() {
           leftIcon={
             <Ionicons name="arrow-back-circle-outline" size={35} color="#fff" />
           }
-          leftIconOnPress={() => alert("navigation On Process")}
+          leftIconOnPress={() => props.navigation.goBack()}
           rightIcon={
             <Ionicons name="settings-outline" size={35} color="#fff" />
           }
-          rightIconOnPress={() => alert("Navigation On Progress")}
+          rightIconOnPress={() => props.navigation.navigate("ChatSetting")}
         />
         {/* </View> */}
         <GiftedChat

@@ -17,7 +17,12 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 // FIREBASE
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getAuth, updateCurrentUser, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  updateCurrentUser,
+  updateProfile,
+  signOut,
+} from "firebase/auth";
 // FIREBASE CONFIG
 import { firebaseConfig } from "../config/firebaseConfig";
 //  IMAGE PICKER
@@ -27,7 +32,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 // LOADER => INSTALLED
 import LottieView from "lottie-react-native";
 
-export default function Profile() {
+export default function Profile(props) {
   // GETTING DATA FROM FIREBASE AUTH
   useEffect(() => {
     console.log(currentUser);
@@ -196,6 +201,11 @@ export default function Profile() {
     setLoaderModal(false);
     setLoader(false);
   };
+  const logout = () => {
+    signOut(currentUser).then(() => {
+      props.navigation.navigate("SignIn");
+    });
+  };
   // JSK
   return (
     <View>
@@ -204,7 +214,6 @@ export default function Profile() {
       ) : (
         <>
           <Header
-            // backgroundColor="#0f1e37"
             titleText="Profile"
             rightIcon={
               <Image
@@ -227,10 +236,9 @@ export default function Profile() {
             direction="alternate"
           >
             <View style={styles.container}>
+              {/* AVATAR HOLDER */}
               <TouchableOpacity onPress={() => selectRBSheet.current.open()}>
-                <View
-                  style={{ alignSelf: "center", marginTop: "5%" }}
-                >
+                <View style={{ alignSelf: "center", marginTop: "5%" }}>
                   <Image
                     source={{ uri: avatar }}
                     style={{
@@ -241,7 +249,7 @@ export default function Profile() {
                   />
                 </View>
               </TouchableOpacity>
-
+              {/* EDIT BTN */}
               <TouchableOpacity onPress={() => selectRBSheet.current.open()}>
                 {/* EDIT BTN */}
                 <View
@@ -259,10 +267,23 @@ export default function Profile() {
                 <View
                   style={[
                     styles.btn,
-                    { backgroundColor: "#ff0095", display: saveBtnVisible },
+                    { backgroundColor: "#2a8500", display: saveBtnVisible },
                   ]}
                 >
                   <Text style={styles.btnText}>SAVE</Text>
+                </View>
+              </TouchableOpacity>
+
+              {/* LOGOUT BTN */}
+              <TouchableOpacity onPress={logout}>
+                {/* EDIT BTN */}
+                <View
+                  style={[
+                    styles.btn,
+                    { backgroundColor: "#fc0324", display: editBtnVisible },
+                  ]}
+                >
+                  <Text style={styles.btnText}>LOGOUT</Text>
                 </View>
               </TouchableOpacity>
 

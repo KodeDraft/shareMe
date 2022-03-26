@@ -29,9 +29,26 @@ export default function App() {
         initialRouteName="SignIn"
         defaultScreenOptions={{ headerShadowVisible: false }}
       >
-        <Stack.Screen name="bottomTab" component={Tabs} />
-        <Stack.Screen name={"SignIn"} component={SignIn} />
-        <Stack.Screen name={"SignUp"} component={SignUp} />
+        <Stack.Screen
+          name="bottomTab"
+          component={Tabs}
+          screenOptions={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={"ChatSetting"}
+          component={ChatSetting}
+          screenOptions={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={"SignIn"}
+          component={SignIn}
+          screenOptions={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={"SignUp"}
+          component={SignUp}
+          screenOptions={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

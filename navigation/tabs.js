@@ -62,6 +62,7 @@ const Tabs = () => {
         name="Home"
         component={Home}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -92,6 +93,9 @@ const Tabs = () => {
         name="Post"
         component={Post}
         options={{
+          tabBarStyle: {
+            display: "none",
+          },
           tabBarIcon: ({ focused }) => (
             <Ionicons name="add" color="#fff" size={33} />
           ),
@@ -102,6 +106,9 @@ const Tabs = () => {
         name="Chat"
         component={Chat}
         options={{
+          tabBarStyle: {
+            display: "none",
+          },
           tabBarIcon: ({ focused }) => (
             <View
               style={{
